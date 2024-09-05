@@ -1,38 +1,175 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+  color: #c9d1d9;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
 .App {
-  text-align: center;
+  width: 100%;
+  background: rgba(17, 25, 40, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  position: relative;
+  height: 100vh;
+  animation: fadeInScale 3s forwards;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
+.main-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  height: 70%;
+  overflow: auto;
+  transition: transform 0.5s ease-in-out;
+}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.question {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 500;
+  background: transparent;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffeb3b;
+}
+
+.answer {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  color: #4caf50;
+  text-align: center;
+  word-wrap: break-word;
+  /* Removed properties to keep the answer visible */
+  /* opacity: 0;
+  transform: translateY(20px); */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.answer.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.control-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+textarea {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #30363d;
+  border-radius: 8px;
+  color: #c9d1d9;
+  padding: 15px;
+  font-size: 16px;
+  resize: none;
+  height: 100px;
+  width: 100%;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+textarea:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 10px #4caf50;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+button {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 48%;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+
+button:hover::before {
+  transform: translateX(150%) translateY(150%) rotate(45deg);
+}
+
+button:hover {
+  background: linear-gradient(135deg, #feb47b, #ff7e5f);
+}
+
+button:active {
+  background: #ff7e5f;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Loading Animation */
+.with_loader:disabled::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid white;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
